@@ -28,6 +28,7 @@ static PKResManager *_instance = nil;
 @property (nonatomic, retain) NSMutableDictionary *resOtherCache;
 @property (nonatomic, retain) NSMutableArray *defaultStyleArray;
 @property (nonatomic, retain) NSMutableArray *allStyleArray;
+@property (nonatomic, retain) NSMutableArray *customStyleArray;
 
 - (NSString *)getDocumentsDirectoryWithSubDir:(NSString *)subDir;
 - (BOOL)isBundleURL:(NSString *)URL;
@@ -53,7 +54,8 @@ resObjectsArray = _resObjectsArray,
 resImageCache = _resImageCache,
 resOtherCache = _resOtherCache,
 allStyleArray = _allStyleArray,
-defaultStyleArray = _defaultStyleArray;
+defaultStyleArray = _defaultStyleArray,
+customStyleArray = _customStyleArray;
 
 - (void)dealloc
 {
@@ -68,7 +70,7 @@ defaultStyleArray = _defaultStyleArray;
     self.resOtherCache = nil;
     self.allStyleArray = nil;
     self.defaultStyleArray = nil;
-    
+    self.customStyleArray = nil;
     [super dealloc];
 }
 
@@ -250,7 +252,7 @@ defaultStyleArray = _defaultStyleArray;
             NSLog(@"error :%@",error);
             return NO;
         }        
-        NSLog(@" %@",self.allStyleArray);
+        NSLog(@"after delete %@",self.allStyleArray);
         return YES;
     }
     return NO;
@@ -359,7 +361,12 @@ defaultStyleArray = _defaultStyleArray;
 }
 - (void)saveAllStyleArray
 {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.allStyleArray];
+    self.customStyleArray = [NSMutableArray arrayWithArray:self.allStyleArray];
+    NSRange range;
+    range.location = 0;
+    range.length = self.defaultStyleArray.count;
+    [self.customStyleArray removeObjectsInRange:range];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.customStyleArray];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:kAllResStyle];
 }
 - (NSMutableArray*)getSavedAllStyleArray
