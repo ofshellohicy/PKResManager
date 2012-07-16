@@ -13,7 +13,7 @@
 #error "PKResManager uses features only available in iOS SDK 4.0 and later."
 #endif
 
-#import "PKResManagerKit.h"
+#import "PKResManager.h"
 
 #define BUNDLE_PREFIX @"bundle://"
 #define DOCUMENTS_PREFIX @"documents://"
