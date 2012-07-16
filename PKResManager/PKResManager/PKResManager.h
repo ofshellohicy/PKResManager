@@ -18,6 +18,7 @@ typedef enum {
 
 
 @protocol PKResChangeStyleDelegate <NSObject>
+@optional
 - (void)changeStyle:(id)sender;
 @end
 

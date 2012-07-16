@@ -278,7 +278,6 @@ customStyleArray = _customStyleArray;
         _resOtherCache = [[NSMutableDictionary alloc] init];        
     }    
     
-    [_resObjectsArray removeAllObjects];
     [_resImageCache removeAllObjects];
     [_resOtherCache removeAllObjects];
     

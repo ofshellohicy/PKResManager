@@ -19,6 +19,7 @@
 		2F4FF39915B40F8400BA831D /* skintype_light.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39515B40F8400BA831D /* skintype_light.bundle */; };
 		2F4FF39A15B40F8400BA831D /* skintype_night.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39615B40F8400BA831D /* skintype_night.bundle */; };
 		2F4FF39B15B40F8400BA831D /* testSave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39715B40F8400BA831D /* testSave.bundle */; };
+		2F4FF3FA15B4211900BA831D /* StyledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF3F915B4211900BA831D /* StyledView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		2F4FF39515B40F8400BA831D /* skintype_light.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_light.bundle; sourceTree = "<group>"; };
 		2F4FF39615B40F8400BA831D /* skintype_night.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_night.bundle; sourceTree = "<group>"; };
 		2F4FF39715B40F8400BA831D /* testSave.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = testSave.bundle; sourceTree = "<group>"; };
+		2F4FF3F815B4211900BA831D /* StyledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledView.h; sourceTree = "<group>"; };
+		2F4FF3F915B4211900BA831D /* StyledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				2F4FF39115B40F8400BA831D /* PKResManager */,
+				2F4FF3F815B4211900BA831D /* StyledView.h */,
+				2F4FF3F915B4211900BA831D /* StyledView.m */,
 				2F4FF38315B40F3A00BA831D /* AppDelegate.h */,
 				2F4FF38415B40F3A00BA831D /* AppDelegate.m */,
 				2F4FF38615B40F3A00BA831D /* ViewController.h */,
@@ -191,6 +196,7 @@
 				2F4FF38515B40F3A00BA831D /* AppDelegate.m in Sources */,
 				2F4FF38815B40F3A00BA831D /* ViewController.m in Sources */,
 				2F4FF39815B40F8400BA831D /* PKResManager.m in Sources */,
+				2F4FF3FA15B4211900BA831D /* StyledView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +306,7 @@
 				2F4FF39015B40F3A00BA831D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
