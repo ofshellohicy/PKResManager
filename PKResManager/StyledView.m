@@ -29,7 +29,7 @@
 #pragma mark - delegate
 - (void)changeStyle:(id)sender
 {
-    [NSThread sleepForTimeInterval:0.02f];
+//    [NSThread sleepForTimeInterval:0.02f];
     if (self.backgroundColor != [UIColor blueColor]) {
         self.backgroundColor = [UIColor blueColor];
     }else {

@@ -35,7 +35,10 @@ typedef enum {
  * Current style type
  */
 @property (nonatomic, readonly) ResStyleType styleType;
-
+/*!
+ * is loading?
+ */
+@property (nonatomic, readonly) BOOL isLoading;
 // Add style Object
 - (void)addChangeStyleObject:(id)object;
 // Object dealloc invoke this method!!!

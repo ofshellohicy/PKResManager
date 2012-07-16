@@ -46,6 +46,9 @@
         [view release];
     }
     
+    __block UILabel *progressLabel  = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0f, 50, 30)];
+    [self.view addSubview:progressLabel];
+    
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     CGRect frame = _progressView.frame;
     frame.origin.x  = 80.0f;
@@ -53,10 +56,21 @@
     _progressView.frame = frame;
     [_progressView setProgress:0.0f];
     [self.view addSubview:_progressView];
+
+    
     [[PKResManager getInstance] changeStyleOnProgress:^(double progress) {
         NSLog(@" progress:%.1f",progress);
+        progressLabel.text = [NSString stringWithFormat:@"%.1f",progress];
+        [progressLabel setNeedsLayout];
+        [progressLabel setNeedsDisplay];
         [_progressView setProgress:(float)progress];
+        [_progressView setNeedsLayout];
+        [_progressView setNeedsDisplay];
+        
     }];    
+    
+
+
     
     [self addTestBtn];
         

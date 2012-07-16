@@ -44,7 +44,8 @@ static PKResManager *_instance = nil;
 @synthesize 
 styleNameArray,
 styleName = _styleName,
-styleType = _styleType;
+styleType = _styleType,
+isLoading = _isLoading;
 
 // private
 @synthesize 
@@ -91,12 +92,16 @@ customStyleArray = _customStyleArray;
 }
 
 - (void)swithToStyle:(NSString *)name
-{
+{    
     if ([_styleName isEqualToString:name] 
-        || name == nil) 
+        || name == nil 
+        || _isLoading) 
     {
         return;
     }
+    
+    _isLoading = YES;
+    
     _styleName = name;
     
     // get style index
@@ -123,6 +128,7 @@ customStyleArray = _customStyleArray;
     else 
     {
         NSLog(@"na ni !!! bundleName:%@",bundleName);
+        _isLoading = NO;
         return;
     }
         
@@ -141,24 +147,35 @@ customStyleArray = _customStyleArray;
     [_resOtherCache removeAllObjects];    
     
     // change style
-    for (int i=0; i < [_resObjectsArray count];i++) 
-    {
-        id object = [_resObjectsArray objectAtIndex:i];
-        if ([object respondsToSelector:@selector(changeStyle:)]) 
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        for (int i=0; i < [_resObjectsArray count];i++) 
         {
-            [object changeStyle:self];
-        }
-        else 
-        {
-            NSLog(@" change style failed ! => %@",object);
+            id object = [_resObjectsArray objectAtIndex:i];
+            if ([object respondsToSelector:@selector(changeStyle:)]) 
+            {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [object changeStyle:self];
+                });
+            }
+            else 
+            {
+                NSLog(@" change style failed ! => %@",object);
+            }
+            
+            for(ResStyleProgressBlock progressBlock in self.styleChangedHandlers) 
+            {            
+                double progress = (double)(i+1) / (double)(_resObjectsArray.count);
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    progressBlock(progress);
+                });
+                
+            }
         }
         
-        for(ResStyleProgressBlock progressBlock in self.styleChangedHandlers) 
-        {            
-            double progress = (double)(i+1) / (double)(_resObjectsArray.count);
-            progressBlock(progress);
-        }
-    }
+    });
+
+    _isLoading = NO;
 }
 
 - (void)changeStyleOnProgress:(ResStyleProgressBlock)progressBlock
@@ -285,6 +302,7 @@ customStyleArray = _customStyleArray;
     self.allStyleArray = [self getSavedStyleArray];
 
     // swith to default style
+    _isLoading = NO;
     NSString *styleName = [self.styleNameArray objectAtIndex:0];    
     [self swithToStyle:styleName];
 }
