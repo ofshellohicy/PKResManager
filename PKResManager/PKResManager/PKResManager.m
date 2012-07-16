@@ -34,8 +34,8 @@ static PKResManager *_instance = nil;
 - (BOOL)isBundleURL:(NSString *)URL;
 - (BOOL)isDocumentsURL:(NSString *)URL;
 - (NSUInteger)styleTypeIndexByName:(NSString *)name;
-- (void)saveAllStyleArray;
-- (NSMutableArray*)getSavedAllStyleArray;
+- (void)saveCustomStyleArray;
+- (NSMutableArray*)getSavedStyleArray;
 @end
 
 @implementation PKResManager
@@ -197,7 +197,7 @@ customStyleArray = _customStyleArray;
 
     [self.allStyleArray removeObjectAtIndex:index];
     
-    [self saveAllStyleArray];
+    [self saveCustomStyleArray];
     
     NSLog(@" %@",self.allStyleArray);
 
@@ -222,7 +222,7 @@ customStyleArray = _customStyleArray;
                                               [NSString stringWithFormat:@"%@%@",DOCUMENTS_PREFIX,bundleName]
                                                                          forKey:name];
                 [self.allStyleArray replaceObjectAtIndex:index withObject:newStyleDict];                
-                [self saveAllStyleArray];
+                [self saveCustomStyleArray];
             }
         }
         if (styleDict == nil) {
@@ -230,7 +230,7 @@ customStyleArray = _customStyleArray;
                          [NSString stringWithFormat:@"%@%@",DOCUMENTS_PREFIX,bundleName]
                                                     forKey:name];
             [self.allStyleArray addObject:styleDict];                    
-            [self saveAllStyleArray];
+            [self saveCustomStyleArray];
         }
         
         // file operation
@@ -283,7 +283,7 @@ customStyleArray = _customStyleArray;
     [_resOtherCache removeAllObjects];
     
     // get all style
-    self.allStyleArray = [self getSavedAllStyleArray];
+    self.allStyleArray = [self getSavedStyleArray];
 
     // swith to default style
     NSString *styleName = [self.styleNameArray objectAtIndex:0];    
@@ -359,7 +359,7 @@ customStyleArray = _customStyleArray;
 {
     return [URL hasPrefix:DOCUMENTS_PREFIX];
 }
-- (void)saveAllStyleArray
+- (void)saveCustomStyleArray
 {
     self.customStyleArray = [NSMutableArray arrayWithArray:self.allStyleArray];
     NSRange range;
@@ -369,7 +369,7 @@ customStyleArray = _customStyleArray;
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.customStyleArray];
     [[NSUserDefaults standardUserDefaults] setObject:data forKey:kAllResStyle];
 }
-- (NSMutableArray*)getSavedAllStyleArray
+- (NSMutableArray*)getSavedStyleArray
 {
     if (!_defaultStyleArray) {
         _defaultStyleArray = [[NSMutableArray alloc] initWithObjects:
