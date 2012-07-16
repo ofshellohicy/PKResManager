@@ -6,14 +6,14 @@
 //  Copyright (c) 2012年 . All rights reserved.
 //
 
-#ifndef ResManagerKit_ResManagerKit_h
-#define ResManagerKit_ResManagerKit_h
+#ifndef PKResManagerKit_PKResManagerKit_h
+#define PKResManagerKit_PKResManagerKit_h
 
 #ifndef __IPHONE_4_0
-#error "ResManagerKit uses features only available in iOS SDK 4.0 and later."
+#error "PKResManager uses features only available in iOS SDK 4.0 and later."
 #endif
 
-#import "PKResManager.h"
+#import "PKResManagerKit.h"
 
 #define BUNDLE_PREFIX @"bundle://"
 #define DOCUMENTS_PREFIX @"documents://"
