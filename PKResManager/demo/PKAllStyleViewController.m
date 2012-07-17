@@ -29,6 +29,7 @@ scrollView = _scrollView;
 
 - (void)dealloc
 {
+    [[PKResManager getInstance] removeChangeStyleObject:self];
     self.scrollView = nil;
     self.imageView = nil;
     [super dealloc];
@@ -115,6 +116,7 @@ scrollView = _scrollView;
         if (progress >= 1.0f) {
 //            time = [[NSDate date] timeIntervalSinceDate:startDate];            
             timeLabel.text = [NSString stringWithFormat:@"%.2f'",time];
+            timeLabel.text = [NSString stringWithFormat:@"%@",[NSDate date]];
             needreset = YES;
         }
     }];   

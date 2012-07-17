@@ -119,6 +119,7 @@ customStyleArray = _customStyleArray;
 //    NSLog(@"resOtherCache:%@",self.resOtherCache);
     
     NSLog(@"all res object count:%d",self.resObjectsArray.count);
+
     // change style
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{

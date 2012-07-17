@@ -47,6 +47,8 @@
     _imageView.image = image;
     _label.font = [[PKResManager getInstance] fontForKey:@"DemoModule-label"];
     [_label setTextColor:[[PKResManager getInstance] colorForKey:@"DemoModule-label"]];
+    
+    [self setNeedsLayout];
 }
 
 @end

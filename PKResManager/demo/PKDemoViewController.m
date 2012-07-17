@@ -12,17 +12,14 @@
 @interface PKDemoViewController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *dataArray;
-@property (nonatomic, retain) PKAllStyleViewController *allStyleController;
 @end
 
 @implementation PKDemoViewController
 @synthesize 
 tableView = _tableView,
-dataArray,
-allStyleController = _allStyleController;
+dataArray;
 - (void)dealloc
 {
-    self.allStyleController = nil;
     self.dataArray = nil;
     self.tableView = nil;
     [super dealloc];
@@ -76,12 +73,7 @@ allStyleController = _allStyleController;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *dataStr = [self.dataArray objectAtIndex:indexPath.row];
-    if ([dataStr isEqualToString:@"All"]) {
-//        if (!_allStyleController) {
-//            _allStyleController = [[PKAllStyleViewController alloc] init];   
-//        }
-//        [self.navigationController pushViewController:_allStyleController animated:YES];
-        
+    if ([dataStr isEqualToString:@"All"]) {        
         PKAllStyleViewController *viewController = [[PKAllStyleViewController alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
         [viewController release];
