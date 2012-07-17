@@ -4,11 +4,11 @@ A theme Manager for iOS.
 
 Function
 ---
-change theme or style
+Change Theme Or UI Style.
+
+Support: UIImage ,UIFont, UIColor
 
 TODO:
 ---
-1. Font
-2. Color
-3. View?
-4. Thread safe
+1. UIView?
+2. BaseView? BaseViewController?
