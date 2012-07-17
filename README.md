@@ -11,3 +11,4 @@ TODO:
 1. Font
 2. Color
 3. View?
+4. Thread safe

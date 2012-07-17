@@ -8,27 +8,28 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "PKDemoViewController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
-
+@synthesize demoViewController = _demoViewController;
 - (void)dealloc
 {
-    [_window release];
-    [_viewController release];
+    self.window = nil;
+    self.demoViewController = nil;
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
-    self.window.rootViewController = self.viewController;
+    self.demoViewController = [[[PKDemoViewController alloc] init] autorelease];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.demoViewController];
+    self.window.rootViewController = navController;//self.viewController;
     [self.window makeKeyAndVisible];
+    [navController release];
+    
     return YES;
 }
 

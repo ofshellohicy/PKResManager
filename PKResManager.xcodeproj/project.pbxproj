@@ -7,22 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F07BBAB15B55E6D00C46164 /* PKDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */; };
+		2F07BBAE15B563C500C46164 /* PKAllStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */; };
+		2F07BBBF15B5697300C46164 /* StyledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBBE15B5697200C46164 /* StyledView.m */; };
 		2F4FF37515B40F3A00BA831D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4FF37415B40F3A00BA831D /* UIKit.framework */; };
 		2F4FF37715B40F3A00BA831D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4FF37615B40F3A00BA831D /* Foundation.framework */; };
 		2F4FF37915B40F3A00BA831D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4FF37815B40F3A00BA831D /* CoreGraphics.framework */; };
 		2F4FF37F15B40F3A00BA831D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF37D15B40F3A00BA831D /* InfoPlist.strings */; };
 		2F4FF38115B40F3A00BA831D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF38015B40F3A00BA831D /* main.m */; };
 		2F4FF38515B40F3A00BA831D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF38415B40F3A00BA831D /* AppDelegate.m */; };
-		2F4FF38815B40F3A00BA831D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF38715B40F3A00BA831D /* ViewController.m */; };
-		2F4FF38B15B40F3A00BA831D /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF38915B40F3A00BA831D /* ViewController.xib */; };
 		2F4FF39815B40F8400BA831D /* PKResManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF39315B40F8400BA831D /* PKResManager.m */; };
 		2F4FF39915B40F8400BA831D /* skintype_light.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39515B40F8400BA831D /* skintype_light.bundle */; };
 		2F4FF39A15B40F8400BA831D /* skintype_night.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39615B40F8400BA831D /* skintype_night.bundle */; };
 		2F4FF39B15B40F8400BA831D /* testSave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39715B40F8400BA831D /* testSave.bundle */; };
-		2F4FF3FA15B4211900BA831D /* StyledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4FF3F915B4211900BA831D /* StyledView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F07BBA915B55E6D00C46164 /* PKDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDemoViewController.h; sourceTree = "<group>"; };
+		2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDemoViewController.m; sourceTree = "<group>"; };
+		2F07BBAC15B563C500C46164 /* PKAllStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAllStyleViewController.h; sourceTree = "<group>"; };
+		2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAllStyleViewController.m; sourceTree = "<group>"; };
+		2F07BBBD15B5697200C46164 /* StyledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledView.h; sourceTree = "<group>"; };
+		2F07BBBE15B5697200C46164 /* StyledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledView.m; sourceTree = "<group>"; };
 		2F4FF37015B40F3A00BA831D /* PKResManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKResManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F4FF37415B40F3A00BA831D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2F4FF37615B40F3A00BA831D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -33,17 +39,12 @@
 		2F4FF38215B40F3A00BA831D /* PKResManager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PKResManager-Prefix.pch"; sourceTree = "<group>"; };
 		2F4FF38315B40F3A00BA831D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2F4FF38415B40F3A00BA831D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2F4FF38615B40F3A00BA831D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2F4FF38715B40F3A00BA831D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		2F4FF38A15B40F3A00BA831D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		2F4FF39215B40F8400BA831D /* PKResManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKResManager.h; sourceTree = "<group>"; };
 		2F4FF39315B40F8400BA831D /* PKResManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKResManager.m; sourceTree = "<group>"; };
 		2F4FF39415B40F8400BA831D /* PKResManagerKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKResManagerKit.h; sourceTree = "<group>"; };
 		2F4FF39515B40F8400BA831D /* skintype_light.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_light.bundle; sourceTree = "<group>"; };
 		2F4FF39615B40F8400BA831D /* skintype_night.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_night.bundle; sourceTree = "<group>"; };
 		2F4FF39715B40F8400BA831D /* testSave.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = testSave.bundle; sourceTree = "<group>"; };
-		2F4FF3F815B4211900BA831D /* StyledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledView.h; sourceTree = "<group>"; };
-		2F4FF3F915B4211900BA831D /* StyledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +61,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F07BBA315B53E1400C46164 /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				2F07BBBD15B5697200C46164 /* StyledView.h */,
+				2F07BBBE15B5697200C46164 /* StyledView.m */,
+				2F07BBAC15B563C500C46164 /* PKAllStyleViewController.h */,
+				2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */,
+				2F07BBA915B55E6D00C46164 /* PKDemoViewController.h */,
+				2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
 		2F4FF36515B40F3A00BA831D = {
 			isa = PBXGroup;
 			children = (
@@ -91,13 +105,9 @@
 			isa = PBXGroup;
 			children = (
 				2F4FF39115B40F8400BA831D /* PKResManager */,
-				2F4FF3F815B4211900BA831D /* StyledView.h */,
-				2F4FF3F915B4211900BA831D /* StyledView.m */,
+				2F07BBA315B53E1400C46164 /* demo */,
 				2F4FF38315B40F3A00BA831D /* AppDelegate.h */,
 				2F4FF38415B40F3A00BA831D /* AppDelegate.m */,
-				2F4FF38615B40F3A00BA831D /* ViewController.h */,
-				2F4FF38715B40F3A00BA831D /* ViewController.m */,
-				2F4FF38915B40F3A00BA831D /* ViewController.xib */,
 				2F4FF37B15B40F3A00BA831D /* Supporting Files */,
 			);
 			path = PKResManager;
@@ -178,7 +188,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F4FF37F15B40F3A00BA831D /* InfoPlist.strings in Resources */,
-				2F4FF38B15B40F3A00BA831D /* ViewController.xib in Resources */,
 				2F4FF39915B40F8400BA831D /* skintype_light.bundle in Resources */,
 				2F4FF39A15B40F8400BA831D /* skintype_night.bundle in Resources */,
 				2F4FF39B15B40F8400BA831D /* testSave.bundle in Resources */,
@@ -194,9 +203,10 @@
 			files = (
 				2F4FF38115B40F3A00BA831D /* main.m in Sources */,
 				2F4FF38515B40F3A00BA831D /* AppDelegate.m in Sources */,
-				2F4FF38815B40F3A00BA831D /* ViewController.m in Sources */,
 				2F4FF39815B40F8400BA831D /* PKResManager.m in Sources */,
-				2F4FF3FA15B4211900BA831D /* StyledView.m in Sources */,
+				2F07BBAB15B55E6D00C46164 /* PKDemoViewController.m in Sources */,
+				2F07BBAE15B563C500C46164 /* PKAllStyleViewController.m in Sources */,
+				2F07BBBF15B5697300C46164 /* StyledView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,14 +219,6 @@
 				2F4FF37E15B40F3A00BA831D /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2F4FF38915B40F3A00BA831D /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F4FF38A15B40F3A00BA831D /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

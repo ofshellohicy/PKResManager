@@ -78,17 +78,17 @@ customStyleArray = _customStyleArray;
 
 - (void)addChangeStyleObject:(id)object
 {
-    if (![_resObjectsArray containsObject:object]) 
+    if (![self.resObjectsArray containsObject:object]) 
     {
-        [_resObjectsArray addObject:object];
+        [self.resObjectsArray addObject:object];
     }
 }
 
 - (void)removeChangeStyleObject:(id)object
 {
-    if ([_resObjectsArray containsObject:object]) 
+    if ([self.resObjectsArray containsObject:object]) 
     {
-        [_resObjectsArray removeObject:object];
+        [self.resObjectsArray removeObject:object];
     }
 }
 - (void)swithToStyle:(NSString *)name
@@ -99,7 +99,7 @@ customStyleArray = _customStyleArray;
     {
         return;
     }
-    
+    NSLog(@"start change style :%@",[NSDate date]);
     _isLoading = YES;
     
     _styleName = name;
@@ -108,22 +108,26 @@ customStyleArray = _customStyleArray;
     self.styleBundle = [self bundleByStyleName:name];
     
     NSAssert(self.styleBundle != nil , @"error: _styleBundle == nil"); 
-    
-    // get plist dict
-    NSString *plistPath=[self.styleBundle pathForResource:COLOR_AND_FONT ofType:@"plist"];    
-    self.resOtherCache = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
-    
+
     // remove cache
     [_resImageCache removeAllObjects]; 
     [_resOtherCache removeAllObjects];    
+
+    // get plist dict
+    NSString *plistPath=[self.styleBundle pathForResource:COLOR_AND_FONT ofType:@"plist"];    
+    self.resOtherCache = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
+//    NSLog(@"resOtherCache:%@",self.resOtherCache);
     
-    NSLog(@"all res object count:%d",_resObjectsArray.count);
+    NSLog(@"all res object count:%d",self.resObjectsArray.count);
+    if (self.resObjectsArray.count<=1) {
+        NSLog(@" nani :%@",self.resObjectsArray);
+    }
     // change style
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        for (int i=0; i < [_resObjectsArray count];i++) 
+        for (int i=0; i < [self.resObjectsArray count];i++) 
         {
-            id object = [_resObjectsArray objectAtIndex:i];
+            id object = [self.resObjectsArray objectAtIndex:i];
             if ([object respondsToSelector:@selector(changeStyle:)]) 
             {
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -137,14 +141,15 @@ customStyleArray = _customStyleArray;
             
             for(ResStyleProgressBlock progressBlock in self.styleChangedHandlers) 
             {            
-                double progress = (double)(i+1) / (double)(_resObjectsArray.count);
+                double progress = (double)(i+1) / (double)(self.resObjectsArray.count);
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     progressBlock(progress);
                 });
                 
             }
         }
-        _isLoading = NO;    
+        _isLoading = NO; 
+        NSLog(@"end change style :%@",[NSDate date]);
     });
     while (!_isLoading) {
         return;
@@ -268,10 +273,7 @@ customStyleArray = _customStyleArray;
     if (!_resOtherCache) {
         _resOtherCache = [[NSMutableDictionary alloc] init];        
     }    
-    
-    [_resImageCache removeAllObjects];
-    [_resOtherCache removeAllObjects];
-    
+        
     // get all style
     self.allStyleArray = [self getSavedStyleArray];
 
@@ -349,16 +351,63 @@ customStyleArray = _customStyleArray;
 
 - (UIFont *)fontForKey:(id)key
 {
-    // TODO:
-    // 需不需要nil时给个默认值
-    return nil;    
+    NSArray *keyArray = [key componentsSeparatedByString:@"-"];    
+    NSAssert(keyArray.count == 2,@"module key name error!!!");
+    
+    NSString *moduleKey = [keyArray objectAtIndex:0];
+    NSString *memberKey = [keyArray objectAtIndex:1];
+    
+    NSDictionary *moduleDict = [self.resOtherCache objectForKey:moduleKey];    
+    NSDictionary *memberDict = [moduleDict objectForKey:memberKey];
+    
+    NSString *fontName = [memberDict objectForKey:@"font"];
+    NSNumber *fontSize = [memberDict objectForKey:@"size"];
+    UIFont *font = [UIFont fontWithName:fontName 
+                                   size:fontSize.floatValue];
+    
+    return font;    
 }
 
 - (UIColor *)colorForKey:(id)key
-{
-    // TODO:
-    // 需不需要nil时给个默认值    
-    return nil;    
+{  
+    NSArray *keyArray = [key componentsSeparatedByString:@"-"];    
+    NSAssert(keyArray.count == 2,@"module key name error!!!");
+    
+    NSString *moduleKey = [keyArray objectAtIndex:0];
+    NSString *memberKey = [keyArray objectAtIndex:1];
+    
+    NSDictionary *moduleDict = [self.resOtherCache objectForKey:moduleKey];    
+    NSDictionary *memberDict = [moduleDict objectForKey:memberKey];
+    
+    NSString *colorStr = [memberDict objectForKey:@"rgb"];
+    
+    NSNumber *redValue;
+    NSNumber *greenValue;
+    NSNumber *blueValue;
+    NSNumber *alphaValue;
+    NSArray *colorArray = [colorStr componentsSeparatedByString:@","];
+    if (colorArray != nil && colorArray.count == 3) {
+        redValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:0] floatValue]];
+        greenValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:1] floatValue]];
+        blueValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:2] floatValue]];
+        alphaValue = [NSNumber numberWithFloat:1.0];
+    } else if (colorArray != nil && colorArray.count == 4) {
+        redValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:0] floatValue]];
+        greenValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:1] floatValue]];
+        blueValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:2] floatValue]];
+        alphaValue = [NSNumber numberWithFloat:[[colorArray objectAtIndex:3] floatValue]];
+    } else {
+        return nil;
+    }
+    
+    if ([alphaValue floatValue]<=0.0f) {
+        return [UIColor clearColor];
+    }
+    return [UIColor colorWithRed:[redValue floatValue]/255.0f 
+                           green:[greenValue floatValue]/255.0f
+                            blue:[blueValue floatValue]/255.0f
+                           alpha:[alphaValue floatValue]];
+    
 }
 #pragma mark - Private
 

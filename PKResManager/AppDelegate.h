@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ViewController;
+@class PKDemoViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) ViewController *viewController;
-
+@property (strong, nonatomic) PKDemoViewController *demoViewController;
 @end

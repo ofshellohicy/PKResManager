@@ -1,5 +1,5 @@
 //
-//  ResManagerKit.h
+//  PKResManager.h
 //  TestResManager
 //
 //  Created by zhong sheng on 12-7-16.
