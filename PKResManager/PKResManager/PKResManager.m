@@ -117,6 +117,7 @@ customStyleArray = _customStyleArray;
     [_resImageCache removeAllObjects]; 
     [_resOtherCache removeAllObjects];    
     
+    NSLog(@"all res object count:%d",_resObjectsArray.count);
     // change style
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
@@ -143,10 +144,12 @@ customStyleArray = _customStyleArray;
                 
             }
         }
-        
+        _isLoading = NO;    
     });
-
-    _isLoading = NO;
+    while (!_isLoading) {
+        return;
+    }
+    
 }
 
 - (void)changeStyleOnProgress:(ResStyleProgressBlock)progressBlock

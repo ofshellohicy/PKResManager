@@ -10,5 +10,8 @@
 #import "PKResManagerKit.h"
 
 @interface StyledView : UIView <PKResChangeStyleDelegate>
+{
+    BOOL isDefault;
+}
 
 @end

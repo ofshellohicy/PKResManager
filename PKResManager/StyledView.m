@@ -22,6 +22,7 @@
     if (self) {
         [[PKResManager getInstance] addChangeStyleObject:self];
         self.backgroundColor = [UIColor blueColor];
+        isDefault = YES;
     }
     return self;
 }
@@ -30,8 +31,9 @@
 - (void)changeStyle:(id)sender
 {
 //    [NSThread sleepForTimeInterval:0.02f];
-    if (self.backgroundColor != [UIColor blueColor]) {
-        self.backgroundColor = [UIColor blueColor];
+    isDefault = !isDefault;
+    if (isDefault) {
+        self.backgroundColor = [UIColor blueColor];        
     }else {
         self.backgroundColor = [UIColor redColor];
     }
