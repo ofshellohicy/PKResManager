@@ -36,6 +36,7 @@ static PKResManager *_instance = nil;
 - (NSUInteger)styleTypeIndexByName:(NSString *)name;
 - (void)saveCustomStyleArray;
 - (NSMutableArray*)getSavedStyleArray;
+- (NSBundle *)bundleByStyleName:(NSString *)name;
 @end
 
 @implementation PKResManager
@@ -90,7 +91,6 @@ customStyleArray = _customStyleArray;
         [_resObjectsArray removeObject:object];
     }
 }
-
 - (void)swithToStyle:(NSString *)name
 {    
     if ([_styleName isEqualToString:name] 
@@ -104,38 +104,9 @@ customStyleArray = _customStyleArray;
     
     _styleName = name;
     
-    // get style index
-    NSInteger index = [self styleTypeIndexByName:name];
-    NSAssert(index != NSNotFound , @"error: index not found"); 
-    
-    NSDictionary *styleDict = [self.allStyleArray objectAtIndex:index];
-    NSString *bundleName = [styleDict objectForKey:name];
-    NSString *filePath = nil;
-    NSString *bundlePath = nil;
-    
-    if ([self isBundleURL:bundleName]) 
-    {
-        _styleType = ResStyleType_System;
-        filePath = [[NSBundle mainBundle] bundlePath];
-        bundlePath = [NSString stringWithFormat:@"%@/%@",filePath,[bundleName substringFromIndex:BUNDLE_PREFIX.length]];
-    }
-    else if([self isDocumentsURL:bundleName])
-    {
-        _styleType = ResStyleType_Custom;
-        filePath = [self getDocumentsDirectoryWithSubDir:CUSTOM_THEME_DIR];
-        bundlePath = [NSString stringWithFormat:@"%@/%@",filePath,[bundleName substringFromIndex:DOCUMENTS_PREFIX.length]];
-    }
-    else 
-    {
-        NSLog(@"na ni !!! bundleName:%@",bundleName);
-        _isLoading = NO;
-        return;
-    }
-        
-    NSLog(@"bundlePath:%@",bundlePath);
-    
     // read resource bundle
-    self.styleBundle = [NSBundle bundleWithPath:bundlePath];
+    self.styleBundle = [self bundleByStyleName:name];
+    
     NSAssert(self.styleBundle != nil , @"error: _styleBundle == nil"); 
     
     // get plist dict
@@ -315,6 +286,26 @@ customStyleArray = _customStyleArray;
     }];
     return retArray;
 }
+- (UIImage *)imageForKey:(id)key style:(NSString *)name
+{
+    if (key == nil) {
+        NSLog(@" imageForKey:style: key = nil");
+        return nil;
+    }
+    NSBundle *tempBundle = [self bundleByStyleName:name];
+    NSAssert(tempBundle != nil,@" tempBundle = nil");
+    
+    UIImage *image = nil;
+    NSString *imagePath = [tempBundle pathForResource:key ofType:@"png"];
+    image = [UIImage imageWithContentsOfFile:imagePath];
+    
+    if (image == nil) 
+    {
+        imagePath = [[NSBundle mainBundle] pathForResource:key ofType:@"png"];
+        image = [UIImage imageWithContentsOfFile:imagePath];
+    }
+    return image;
+}
 - (UIImage *)imageForKey:(id)key cache:(BOOL)needCache
 {
     if (key == nil) {
@@ -443,6 +434,38 @@ customStyleArray = _customStyleArray;
         }   
 	}
     return newDirectory;
+}
+- (NSBundle *)bundleByStyleName:(NSString *)name
+{
+    NSInteger index = [self styleTypeIndexByName:name];
+    NSAssert(index != NSNotFound , @"error: index not found"); 
+    
+    NSDictionary *styleDict = [self.allStyleArray objectAtIndex:index];
+    NSString *bundleName = [styleDict objectForKey:name];
+    NSString *filePath = nil;
+    NSString *bundlePath = nil;
+    
+    if ([self isBundleURL:bundleName]) 
+    {
+        _styleType = ResStyleType_System;
+        filePath = [[NSBundle mainBundle] bundlePath];
+        bundlePath = [NSString stringWithFormat:@"%@/%@",filePath,[bundleName substringFromIndex:BUNDLE_PREFIX.length]];
+    }
+    else if([self isDocumentsURL:bundleName])
+    {
+        _styleType = ResStyleType_Custom;
+        filePath = [self getDocumentsDirectoryWithSubDir:CUSTOM_THEME_DIR];
+        bundlePath = [NSString stringWithFormat:@"%@/%@",filePath,[bundleName substringFromIndex:DOCUMENTS_PREFIX.length]];
+    }
+    else 
+    {
+        NSLog(@"na ni !!! bundleName:%@",bundleName);
+        _styleType = ResStyleType_Unknow;        
+        return nil;
+    }
+    NSLog(@"bundlePath:%@",bundlePath);
+    
+    return [NSBundle bundleWithPath:bundlePath];
 }
 
 

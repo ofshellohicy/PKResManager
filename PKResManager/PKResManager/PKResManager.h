@@ -74,7 +74,9 @@ typedef enum {
  *   @method
  *   @abstract get image by key 
  *   @param needCache , will cached
+ *   @param name, will not cached
  */
+- (UIImage *)imageForKey:(id)key style:(NSString *)name;
 - (UIImage *)imageForKey:(id)key cache:(BOOL)needCache;
 - (UIImage *)imageForKey:(id)key;
 
