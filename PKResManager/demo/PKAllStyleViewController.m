@@ -30,6 +30,10 @@ scrollView = _scrollView;
     self.scrollView = nil;
     [super dealloc];
 }
+- (void)popSelf
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,6 +41,12 @@ scrollView = _scrollView;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"all style";
     self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" 
+                                                                 style:UIBarButtonItemStylePlain 
+                                                                target:self 
+                                                                action:@selector(popSelf)];
+    self.navigationItem.leftBarButtonItem = backItem;
+    [backItem release];
     
     [self addAllStyleView];
     
@@ -118,17 +128,31 @@ scrollView = _scrollView;
 }
 - (void)customAction
 {
-    [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];   
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE onComplete:^(BOOL finished) {
+        if (finished) {
+            self.navigationItem.leftBarButtonItem.enabled = YES;
+        }
+    }];   
 }
 - (void)changeAction
 {
+    self.navigationItem.leftBarButtonItem.enabled = NO;
     if ([[PKResManager getInstance].styleName isEqualToString:SYSTEM_STYLE_LIGHT]) 
     {
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT];
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT onComplete:^(BOOL finished) {
+            if (finished) {
+                self.navigationItem.leftBarButtonItem.enabled = YES;
+            }
+        }];
     }
     else 
     {
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT];
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT onComplete:^(BOOL finished) {
+            if (finished) {
+                self.navigationItem.leftBarButtonItem.enabled = YES;
+            }
+        }];   
     }
 }
 - (void)resetAction

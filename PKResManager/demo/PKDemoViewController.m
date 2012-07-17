@@ -29,6 +29,7 @@ dataArray;
 {
     [super viewDidLoad];
     [[PKResManager getInstance] addChangeStyleObject:self];    
+    self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
     self.navigationItem.title = @"Demo";
     self.dataArray = [[NSMutableArray alloc] initWithObjects:@"All",@"Custom",@"Reset", nil];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];

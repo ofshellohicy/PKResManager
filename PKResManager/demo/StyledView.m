@@ -12,9 +12,9 @@
 
 - (void)dealloc
 {
+    [[PKResManager getInstance] removeChangeStyleObject:self];
     [_imageView release];    
     [_label release];
-    [[PKResManager getInstance] removeChangeStyleObject:self];
     [super dealloc];
 }
 

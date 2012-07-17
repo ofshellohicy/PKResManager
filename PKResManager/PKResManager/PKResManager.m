@@ -79,19 +79,20 @@ customStyleArray = _customStyleArray;
 - (void)addChangeStyleObject:(id)object
 {
     if (![self.resObjectsArray containsObject:object]) 
-    {
-        [self.resObjectsArray addObject:object];
+    {   
+        [self.resObjectsArray addObject:object];    
     }
 }
 
 - (void)removeChangeStyleObject:(id)object
 {
-    if ([self.resObjectsArray containsObject:object]) 
+    if ([self.resObjectsArray containsObject:object])  
     {
-        [self.resObjectsArray removeObject:object];
+        [self.resObjectsArray removeObject:object];    
     }
 }
-- (void)swithToStyle:(NSString *)name
+
+- (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block
 {    
     if ([_styleName isEqualToString:name] 
         || name == nil 
@@ -101,6 +102,7 @@ customStyleArray = _customStyleArray;
     }
     NSLog(@"start change style :%@",[NSDate date]);
     _isLoading = YES;
+    block(NO);
     
     _styleName = name;
     
@@ -147,9 +149,10 @@ customStyleArray = _customStyleArray;
             }
         }
         _isLoading = NO; 
+        block(YES);
         NSLog(@"end change style :%@",[NSDate date]);
     });
-    while (!_isLoading) {
+    while (!_isLoading) {        
         return;
     }
     
@@ -278,7 +281,9 @@ customStyleArray = _customStyleArray;
     // swith to default style
     _isLoading = NO;
     NSString *styleName = [self.styleNameArray objectAtIndex:0];    
-    [self swithToStyle:styleName];
+    [self swithToStyle:styleName onComplete:^(BOOL finished) {
+        return;
+    }];
 }
 - (NSMutableArray *)styleNameArray
 {

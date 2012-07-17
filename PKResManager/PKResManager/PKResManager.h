@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^ResStyleProgressBlock) (double progress);
+typedef void (^ResStyleCompleteBlock) (BOOL finished);
 
 typedef enum {
     ResStyleType_System,
@@ -46,7 +47,7 @@ typedef enum {
 /*!
  * Switch to style by name
  */
-- (void)swithToStyle:(NSString *)name;
+- (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block;
 /*!
  * get change progress
  */
