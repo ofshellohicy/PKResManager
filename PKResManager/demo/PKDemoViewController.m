@@ -33,7 +33,6 @@ dataArray;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    NSLog(@"demo count:%d",self.retainCount);
 }
 
 - (void)viewDidUnload

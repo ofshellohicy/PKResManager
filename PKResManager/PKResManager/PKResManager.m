@@ -137,10 +137,10 @@ customStyleArray = _customStyleArray;
                 NSLog(@" change style failed ! => %@",object);
             }
             
+            __block double progress = (double)(i+1) / (double)(self.resObjectsArray.count);                                
             for(ResStyleProgressBlock progressBlock in self.styleChangedHandlers) 
             {            
-                double progress = (double)(i+1) / (double)(self.resObjectsArray.count);
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                dispatch_sync(dispatch_get_main_queue(), ^{                    
                     progressBlock(progress);
                 });
                 

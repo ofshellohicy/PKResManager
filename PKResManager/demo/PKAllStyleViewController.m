@@ -65,7 +65,7 @@ scrollView = _scrollView;
 #pragma mark - Private
 - (void)addAllStyleView
 {
-    int rowCount = 300;
+    int rowCount = 200;
     
     CGRect frame = CGRectMake(0.0f, 30, self.view.bounds.size.width, self.view.bounds.size.height-120.0f);
     _scrollView = [[UIScrollView alloc] initWithFrame:frame];
@@ -102,21 +102,19 @@ scrollView = _scrollView;
     progressView.frame = frame;
     [progressView setProgress:0.0f];
     [self.view addSubview:progressView];
-    __block NSDate *startDate = [NSDate date];
     __block BOOL needreset = YES;
     __block NSTimeInterval time = 0.0f;
     [[PKResManager getInstance] changeStyleOnProgress:^(double progress) {        
         if (needreset) {
-            startDate = [NSDate date];
             needreset = NO;
+            time = [[NSDate date] timeIntervalSince1970];
         }
         progressLabel.text = [NSString stringWithFormat:@"%.1f%%",progress*100];
         
         [progressView setProgress:(float)progress];
         if (progress >= 1.0f) {
-//            time = [[NSDate date] timeIntervalSinceDate:startDate];            
+            time = [[NSDate date] timeIntervalSince1970] - time;            
             timeLabel.text = [NSString stringWithFormat:@"%.2f'",time];
-            timeLabel.text = [NSString stringWithFormat:@"%@",[NSDate date]];
             needreset = YES;
         }
     }];   
