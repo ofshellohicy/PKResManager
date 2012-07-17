@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PKDemoViewController : UIViewController <UITableViewDelegate,UITableViewDataSource>
+@interface PKDemoViewController : UIViewController <UITableViewDelegate,UITableViewDataSource,PKResChangeStyleDelegate>
 
 @end

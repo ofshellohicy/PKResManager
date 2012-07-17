@@ -17,30 +17,26 @@
 - (void)addTestBtn;
 - (void)addAllStyleView;
 - (void)addProgressView;
-@property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @end
 
 @implementation PKAllStyleViewController
 
 @synthesize 
-imageView = _imageView,
 scrollView = _scrollView;
 
 - (void)dealloc
 {
-    [[PKResManager getInstance] removeChangeStyleObject:self];
     self.scrollView = nil;
-    self.imageView = nil;
     [super dealloc];
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[PKResManager getInstance] addChangeStyleObject:self];    
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"all style";
+    self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
     
     [self addAllStyleView];
     
@@ -163,14 +159,6 @@ scrollView = _scrollView;
     [resetBtn addTarget:self action:@selector(resetAction) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:resetBtn];
     [resetBtn release];    
-}
-#pragma mark - PKResChangeStyleDelegate
-- (void)changeStyle:(id)sender
-{
-    UIImage *image = [[PKResManager getInstance] imageForKey:@"sendbutton"];
-    _imageView.image = image;
-    [_imageView setNeedsDisplay];
-    [_imageView setNeedsLayout];
 }
 
 @end

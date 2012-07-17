@@ -42,6 +42,11 @@
 	</dict>
 	<key>DemoModule</key>
 	<dict>
+		<key>navBar</key>
+		<dict>
+			<key>rgb</key>
+			<string>0,50,200</string>
+		</dict>
 		<key>styleView</key>
 		<dict>
 			<key>rgb</key>

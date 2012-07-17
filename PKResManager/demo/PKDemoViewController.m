@@ -20,6 +20,7 @@ tableView = _tableView,
 dataArray;
 - (void)dealloc
 {
+    [[PKResManager getInstance] removeChangeStyleObject:self];
     self.dataArray = nil;
     self.tableView = nil;
     [super dealloc];
@@ -27,6 +28,7 @@ dataArray;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[PKResManager getInstance] addChangeStyleObject:self];    
     self.navigationItem.title = @"Demo";
     self.dataArray = [[NSMutableArray alloc] initWithObjects:@"All",@"Custom",@"Reset", nil];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
@@ -82,6 +84,11 @@ dataArray;
     }else if([dataStr isEqualToString:@"Reset"]){
         [[PKResManager getInstance] resetStyle];
     }
+}
+#pragma mark - PKResChangeStyleDelegate
+- (void)changeStyle:(id)sender
+{
+    self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
 }
 
 @end
