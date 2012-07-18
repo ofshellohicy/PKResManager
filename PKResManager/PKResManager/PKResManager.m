@@ -218,6 +218,11 @@ customStyleArray = _customStyleArray;
     
     NSLog(@" %@",self.allStyleArray);
 
+    // need reset
+    if ([_styleName isEqualToString:name]) {
+        [self resetStyle];
+    }
+    
     return YES;    
 }
 // TODO: version perview

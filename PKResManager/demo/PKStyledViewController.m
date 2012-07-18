@@ -56,7 +56,7 @@ scrollView = _scrollView;
 #pragma mark - Private
 - (void)addAllStyleView
 {
-    int rowCount = 200;
+    int rowCount = 150;
     
     CGRect frame = CGRectMake(0.0f, 30, self.view.bounds.size.width, self.view.bounds.size.height-120.0f);
     _scrollView = [[UIScrollView alloc] initWithFrame:frame];

@@ -33,6 +33,6 @@
 #define SYSTEM_STYLE_NIGHT_URL @"bundle://skintype_night.bundle" 
 #define SYSTEM_STYLE_VERSION @"SYSTEM_STYLE_VERSION"
 
-#define COLOR_AND_FONT    @"color_font"
+#define COLOR_AND_FONT    @"#color_font"
 
 #endif
