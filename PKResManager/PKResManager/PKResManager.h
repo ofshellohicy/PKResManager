@@ -50,7 +50,9 @@ typedef enum {
  */
 - (void)swithToStyle:(NSString *)name; // not safety
 - (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block; 
-
+/*!
+ * containsStyle
+ */
 - (BOOL)containsStyle:(NSString *)name;
 /*!
  * get change progress
