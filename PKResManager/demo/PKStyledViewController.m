@@ -9,8 +9,6 @@
 #import "PKStyledViewController.h"
 #import "StyledView.h"
 
-#define CUSTOM_STYLE @"customStyle"
-
 @interface PKStyledViewController ()
 - (void)customAction;
 - (void)changeAction;

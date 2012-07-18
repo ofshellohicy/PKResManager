@@ -135,13 +135,14 @@ customStyleArray = _customStyleArray;
 //    NSLog(@"resOtherCache:%@",self.resOtherCache);
     
     NSLog(@"all res object count:%d",self.resObjectsArray.count);
-
+    // thread issue
+    NSMutableArray *holdResObjectArray = [NSMutableArray arrayWithArray:self.resObjectsArray];
     // change style
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
-        for (int i=0; i < [self.resObjectsArray count];i++) 
+        for (int i=0; i < holdResObjectArray.count;i++) 
         {
-            id object = [self.resObjectsArray objectAtIndex:i];
+            id object = [holdResObjectArray objectAtIndex:i];
             if ([object respondsToSelector:@selector(changeStyle:)]) 
             {
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -153,7 +154,7 @@ customStyleArray = _customStyleArray;
                 NSLog(@" change style failed ! => %@",object);
             }
             
-            __block double progress = (double)(i+1) / (double)(self.resObjectsArray.count);                                
+            __block double progress = (double)(i+1) / (double)(holdResObjectArray.count);                                
             for(ResStyleProgressBlock progressBlock in self.styleChangedHandlers) 
             {            
                 dispatch_sync(dispatch_get_main_queue(), ^{                    

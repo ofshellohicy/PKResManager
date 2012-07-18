@@ -8,6 +8,7 @@
 
 #import "PKDemoViewController.h"
 #import "PKStyledViewController.h"
+#import "PKStyleListViewController.h"
 
 @interface PKDemoViewController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -31,8 +32,8 @@ dataArray;
     [[PKResManager getInstance] addChangeStyleObject:self];    
     self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
     self.navigationItem.title = @"Demo";
-    self.dataArray = [[NSMutableArray alloc] initWithObjects:@"Demo",@"List",@"Reset", nil];
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.dataArray = [[[NSMutableArray alloc] initWithObjects:@"Demo",@"List",@"Reset", nil] autorelease];
+    self.tableView = [[[UITableView alloc] initWithFrame:self.view.bounds] autorelease];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -81,7 +82,9 @@ dataArray;
         [viewController release];
         
     }else if([dataStr isEqualToString:@"List"]){
-        
+        PKStyleListViewController *viewController = [[PKStyleListViewController alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
+        [viewController release];
     }else if([dataStr isEqualToString:@"Reset"]){
         [[PKResManager getInstance] resetStyle];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"完成" 

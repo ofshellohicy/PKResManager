@@ -9,24 +9,37 @@
 #import "PKStyleListViewController.h"
 
 @interface PKStyleListViewController ()
+@property (nonatomic, retain) UITableView *tableView;
+@property (nonatomic, retain) NSMutableArray *dataArray;
 
 @end
 
 @implementation PKStyleListViewController
+@synthesize 
+tableView = _tableView,
+dataArray = _dataArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+
+- (void)dealloc
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    self.tableView = nil;
+    self.dataArray = nil;
+    [super dealloc];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [self.view addSubview:_tableView];
+    }
+    if (!_dataArray)
+    {
+        _dataArray = [[NSMutableArray alloc] initWithObjects:@"Light",@"Night",@"Custom" ,nil];
+    }
 }
 
 - (void)viewDidUnload
@@ -35,9 +48,37 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if (self.dataArray.count > 0) {
+        return self.dataArray.count;
+    }
+    return 0;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = @"styleListId";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *dataStr = [self.dataArray objectAtIndex:indexPath.row];
+    if ([dataStr isEqualToString:@"Light"]) {        
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT];
+    }else if([dataStr isEqualToString:@"Night"]){
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT];        
+    }else if([dataStr isEqualToString:@"Custom"]){
+        [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];                
+    }
+}
 @end

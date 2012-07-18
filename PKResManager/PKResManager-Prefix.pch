@@ -12,4 +12,7 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import "PKResManagerKit.h"
+
+#define CUSTOM_STYLE @"customStyle"
+
 #endif
