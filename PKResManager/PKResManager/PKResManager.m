@@ -171,7 +171,13 @@ customStyleArray = _customStyleArray;
     }
     
 }
-
+- (BOOL)containsStyle:(NSString *)name
+{
+    if ([self styleTypeIndexByName:name] != NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
 - (void)changeStyleOnProgress:(ResStyleProgressBlock)progressBlock
 {
     [self.styleChangedHandlers addObject:[progressBlock copy]];

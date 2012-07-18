@@ -113,7 +113,7 @@ scrollView = _scrollView;
 }
 - (void)customAction
 {
-    if ([PKResManager getInstance].allStyleArray.count > 2) {
+    if ([[PKResManager getInstance] containsStyle:CUSTOM_STYLE]) {
         [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];        
     }
 }
