@@ -99,6 +99,11 @@ dataArray;
 #pragma mark - PKResChangeStyleDelegate
 - (void)changeStyle:(id)sender
 {
+    [[UIApplication sharedApplication] setStatusBarStyle:UIScrollViewIndicatorStyleDefault animated:YES];
+    if ([[PKResManager getInstance].styleName isEqualToString:SYSTEM_STYLE_NIGHT]) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];        
+    }
+
     self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
 }
 
