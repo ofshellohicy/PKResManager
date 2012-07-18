@@ -11,7 +11,7 @@
 @interface PKStyleListViewController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) NSMutableArray *dataArray;
-
+- (void)refreshDataSource;
 @end
 
 @implementation PKStyleListViewController
@@ -36,10 +36,26 @@ dataArray = _dataArray;
         _tableView.dataSource = self;
         [self.view addSubview:_tableView];
     }
-    if (!_dataArray)
-    {
-        _dataArray = [[NSMutableArray alloc] initWithObjects:@"Light",@"Night",@"Custom" ,nil];
-    }
+    [self refreshDataSource];
+    
+    UIButton *addCustomStyleBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 300, 60, 30)];
+    addCustomStyleBtn.backgroundColor = [UIColor blueColor];
+    [addCustomStyleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [addCustomStyleBtn setTitle:@"Add" forState:UIControlStateNormal];
+    [addCustomStyleBtn addTarget:self 
+                          action:@selector(addCustomStyleAction:) 
+                forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:addCustomStyleBtn];
+    
+    
+    UIButton *delCustomStyleBtn = [[UIButton alloc] initWithFrame:CGRectMake(120, 300, 60, 30)];
+    [delCustomStyleBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];    
+    delCustomStyleBtn.backgroundColor = [UIColor redColor];
+    [delCustomStyleBtn setTitle:@"Del" forState:UIControlStateNormal];
+    [delCustomStyleBtn addTarget:self 
+                          action:@selector(delCustomStyleAction:) 
+                forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:delCustomStyleBtn];
 }
 
 - (void)viewDidUnload
@@ -47,7 +63,35 @@ dataArray = _dataArray;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
-
+#pragma mark - Private
+- (void)refreshDataSource
+{
+    NSMutableArray *allStyleArray = [PKResManager getInstance].allStyleArray;
+    if (!_dataArray)
+    {
+        _dataArray = [[NSMutableArray alloc] initWithCapacity:allStyleArray.count];
+    }
+    [_dataArray removeAllObjects];
+    [allStyleArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *aStyleDict = (NSDictionary*)obj;
+        NSString *styleName = [aStyleDict objectForKey:kStyleName];
+        //NSString *styleVersion = [aStyleDict objectForKey:kStyleVersion];
+        [_dataArray addObject:styleName];
+    }];
+    [self.tableView reloadData];
+}
+- (void)addCustomStyleAction:(id)sender
+{
+    // test save custom style
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"testSave" ofType:@"bundle"]];    
+    [[PKResManager getInstance] saveStyle:CUSTOM_STYLE withBundle:bundle];
+    [self refreshDataSource];
+}
+- (void)delCustomStyleAction:(id)sender
+{
+    [[PKResManager getInstance] deleteStyle:CUSTOM_STYLE];
+    [self refreshDataSource];
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -72,13 +116,8 @@ dataArray = _dataArray;
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *dataStr = [self.dataArray objectAtIndex:indexPath.row];
-    if ([dataStr isEqualToString:@"Light"]) {        
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT];
-    }else if([dataStr isEqualToString:@"Night"]){
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT];        
-    }else if([dataStr isEqualToString:@"Custom"]){
-        [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];                
-    }
+    NSString *styleName = [self.dataArray objectAtIndex:indexPath.row];
+    [[PKResManager getInstance] swithToStyle:styleName];
 }
+
 @end

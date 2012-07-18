@@ -25,9 +25,9 @@ typedef enum {
 
 @interface PKResManager : NSObject
 /*!
- * All style name
+ * All style Dict Array
  */
-@property (nonatomic, readonly) NSMutableArray *styleNameArray;
+@property (nonatomic, readonly) NSMutableArray *allStyleArray;
 /*!
  * Current style name
  */
@@ -46,9 +46,10 @@ typedef enum {
 - (void)removeChangeStyleObject:(id)object;
 /*!
  * Switch to style by name
+ * @discuss You should not swith to a new style until completed
  */
-- (void)swithToStyle:(NSString *)name;
-- (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block;
+- (void)swithToStyle:(NSString *)name; // not safety
+- (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block; 
 /*!
  * get change progress
  */

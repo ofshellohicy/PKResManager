@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PKStyledViewController : UIViewController <PKResChangeStyleDelegate>
+@interface PKStyledViewController : UIViewController
 
 @end

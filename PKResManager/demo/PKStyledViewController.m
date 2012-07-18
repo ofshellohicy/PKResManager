@@ -45,12 +45,6 @@ scrollView = _scrollView;
 
     // button
     [self addTestBtn];
-    
-    // test save custom style
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"testSave" ofType:@"bundle"]];    
-    [[PKResManager getInstance] saveStyle:CUSTOM_STYLE withBundle:bundle];
-    //[[PKResManager getInstance] deleteStyle:CUSTOM_STYLE];
-        
 }
 
 - (void)viewDidUnload
@@ -119,7 +113,9 @@ scrollView = _scrollView;
 }
 - (void)customAction
 {
-    [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];
+    if ([PKResManager getInstance].allStyleArray.count > 2) {
+        [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];        
+    }
 }
 - (void)changeAction
 {
