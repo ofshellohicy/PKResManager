@@ -1,5 +1,5 @@
 //
-//  PKAllStyleViewController.h
+//  PKStyledViewController.h
 //  PKResManager
 //
 //  Created by zhong sheng on 12-7-17.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PKAllStyleViewController : UIViewController <PKResChangeStyleDelegate>
+@interface PKStyledViewController : UIViewController <PKResChangeStyleDelegate>
 
 @end

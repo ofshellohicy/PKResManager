@@ -80,7 +80,10 @@ customStyleArray = _customStyleArray;
 {
     if (![self.resObjectsArray containsObject:object]) 
     {   
-        [self.resObjectsArray addObject:object];    
+        @synchronized(self.resObjectsArray) 
+        {
+            [self.resObjectsArray addObject:object];    
+        }
     }
 }
 
@@ -88,10 +91,21 @@ customStyleArray = _customStyleArray;
 {
     if ([self.resObjectsArray containsObject:object])  
     {
-        [self.resObjectsArray removeObject:object];    
+        @synchronized(self.resObjectsArray) 
+        {
+            [self.resObjectsArray removeObject:object];    
+        }
     }
 }
-
+- (void)swithToStyle:(NSString *)name
+{
+    @synchronized(self.resObjectsArray) 
+    { 
+        [self swithToStyle:name onComplete:^(BOOL finished) {
+            return ;
+        }];
+    }
+}
 - (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block
 {    
     if ([_styleName isEqualToString:name] 

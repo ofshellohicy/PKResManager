@@ -47,6 +47,7 @@ typedef enum {
 /*!
  * Switch to style by name
  */
+- (void)swithToStyle:(NSString *)name;
 - (void)swithToStyle:(NSString *)name onComplete:(ResStyleCompleteBlock)block;
 /*!
  * get change progress

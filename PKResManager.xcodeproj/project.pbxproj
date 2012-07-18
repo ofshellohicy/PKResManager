@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F07BBAB15B55E6D00C46164 /* PKDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */; };
-		2F07BBAE15B563C500C46164 /* PKAllStyleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */; };
+		2F07BBAE15B563C500C46164 /* PKStyledViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBAD15B563C500C46164 /* PKStyledViewController.m */; };
 		2F07BBBF15B5697300C46164 /* StyledView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F07BBBE15B5697200C46164 /* StyledView.m */; };
 		2F4FF37515B40F3A00BA831D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4FF37415B40F3A00BA831D /* UIKit.framework */; };
 		2F4FF37715B40F3A00BA831D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F4FF37615B40F3A00BA831D /* Foundation.framework */; };
@@ -20,13 +20,14 @@
 		2F4FF39915B40F8400BA831D /* skintype_light.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39515B40F8400BA831D /* skintype_light.bundle */; };
 		2F4FF39A15B40F8400BA831D /* skintype_night.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39615B40F8400BA831D /* skintype_night.bundle */; };
 		2F4FF39B15B40F8400BA831D /* testSave.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2F4FF39715B40F8400BA831D /* testSave.bundle */; };
+		2FDCA45015B5E4B4005F68D6 /* PKStyleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCA44F15B5E4B4005F68D6 /* PKStyleListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2F07BBA915B55E6D00C46164 /* PKDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDemoViewController.h; sourceTree = "<group>"; };
 		2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDemoViewController.m; sourceTree = "<group>"; };
-		2F07BBAC15B563C500C46164 /* PKAllStyleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKAllStyleViewController.h; sourceTree = "<group>"; };
-		2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKAllStyleViewController.m; sourceTree = "<group>"; };
+		2F07BBAC15B563C500C46164 /* PKStyledViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PKStyledViewController.h; sourceTree = "<group>"; };
+		2F07BBAD15B563C500C46164 /* PKStyledViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStyledViewController.m; sourceTree = "<group>"; };
 		2F07BBBD15B5697200C46164 /* StyledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyledView.h; sourceTree = "<group>"; };
 		2F07BBBE15B5697200C46164 /* StyledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyledView.m; sourceTree = "<group>"; };
 		2F4FF37015B40F3A00BA831D /* PKResManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKResManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,6 +46,8 @@
 		2F4FF39515B40F8400BA831D /* skintype_light.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_light.bundle; sourceTree = "<group>"; };
 		2F4FF39615B40F8400BA831D /* skintype_night.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = skintype_night.bundle; sourceTree = "<group>"; };
 		2F4FF39715B40F8400BA831D /* testSave.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = testSave.bundle; sourceTree = "<group>"; };
+		2FDCA44E15B5E4B4005F68D6 /* PKStyleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKStyleListViewController.h; sourceTree = "<group>"; };
+		2FDCA44F15B5E4B4005F68D6 /* PKStyleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKStyleListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +69,10 @@
 			children = (
 				2F07BBBD15B5697200C46164 /* StyledView.h */,
 				2F07BBBE15B5697200C46164 /* StyledView.m */,
-				2F07BBAC15B563C500C46164 /* PKAllStyleViewController.h */,
-				2F07BBAD15B563C500C46164 /* PKAllStyleViewController.m */,
+				2F07BBAC15B563C500C46164 /* PKStyledViewController.h */,
+				2F07BBAD15B563C500C46164 /* PKStyledViewController.m */,
+				2FDCA44E15B5E4B4005F68D6 /* PKStyleListViewController.h */,
+				2FDCA44F15B5E4B4005F68D6 /* PKStyleListViewController.m */,
 				2F07BBA915B55E6D00C46164 /* PKDemoViewController.h */,
 				2F07BBAA15B55E6D00C46164 /* PKDemoViewController.m */,
 			);
@@ -205,8 +210,9 @@
 				2F4FF38515B40F3A00BA831D /* AppDelegate.m in Sources */,
 				2F4FF39815B40F8400BA831D /* PKResManager.m in Sources */,
 				2F07BBAB15B55E6D00C46164 /* PKDemoViewController.m in Sources */,
-				2F07BBAE15B563C500C46164 /* PKAllStyleViewController.m in Sources */,
+				2F07BBAE15B563C500C46164 /* PKStyledViewController.m in Sources */,
 				2F07BBBF15B5697300C46164 /* StyledView.m in Sources */,
+				2FDCA45015B5E4B4005F68D6 /* PKStyleListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

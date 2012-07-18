@@ -7,7 +7,7 @@
 //
 
 #import "PKDemoViewController.h"
-#import "PKAllStyleViewController.h"
+#import "PKStyledViewController.h"
 
 @interface PKDemoViewController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -31,7 +31,7 @@ dataArray;
     [[PKResManager getInstance] addChangeStyleObject:self];    
     self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
     self.navigationItem.title = @"Demo";
-    self.dataArray = [[NSMutableArray alloc] initWithObjects:@"All",@"Custom",@"Reset", nil];
+    self.dataArray = [[NSMutableArray alloc] initWithObjects:@"Demo",@"List",@"Reset", nil];
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -75,15 +75,22 @@ dataArray;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *dataStr = [self.dataArray objectAtIndex:indexPath.row];
-    if ([dataStr isEqualToString:@"All"]) {        
-        PKAllStyleViewController *viewController = [[PKAllStyleViewController alloc] init];
+    if ([dataStr isEqualToString:@"Demo"]) {        
+        PKStyledViewController *viewController = [[PKStyledViewController alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
         [viewController release];
         
-    }else if([dataStr isEqualToString:@"Custom"]){
+    }else if([dataStr isEqualToString:@"List"]){
         
     }else if([dataStr isEqualToString:@"Reset"]){
         [[PKResManager getInstance] resetStyle];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"完成" 
+                                                            message:nil 
+                                                           delegate:nil 
+                                                  cancelButtonTitle:@"确定" 
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        [alertView autorelease];
     }
 }
 #pragma mark - PKResChangeStyleDelegate

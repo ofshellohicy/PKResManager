@@ -1,17 +1,17 @@
 //
-//  PKAllStyleViewController.m
+//  PKStyledViewController.m
 //  PKResManager
 //
 //  Created by zhong sheng on 12-7-17.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "PKAllStyleViewController.h"
+#import "PKStyledViewController.h"
 #import "StyledView.h"
 
 #define CUSTOM_STYLE @"customStyle"
 
-@interface PKAllStyleViewController ()
+@interface PKStyledViewController ()
 - (void)customAction;
 - (void)changeAction;
 - (void)addTestBtn;
@@ -20,7 +20,7 @@
 @property (nonatomic, retain) UIScrollView *scrollView;
 @end
 
-@implementation PKAllStyleViewController
+@implementation PKStyledViewController
 
 @synthesize 
 scrollView = _scrollView;
@@ -40,13 +40,6 @@ scrollView = _scrollView;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"all style";
-    self.navigationController.navigationBar.tintColor = [[PKResManager getInstance] colorForKey:@"DemoModule-navBar"];
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" 
-                                                                 style:UIBarButtonItemStylePlain 
-                                                                target:self 
-                                                                action:@selector(popSelf)];
-    self.navigationItem.leftBarButtonItem = backItem;
-    [backItem release];
     
     [self addAllStyleView];
     
@@ -90,7 +83,7 @@ scrollView = _scrollView;
 {
     // percent 
     UILabel *progressLabel  = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 0.0f, 50, 30)];
-    progressLabel.text = @"0.0%%";
+    progressLabel.text = @"0.0% ";
     progressLabel.font = [UIFont systemFontOfSize:12.0f];
     [self.view addSubview:progressLabel];
     
@@ -128,31 +121,17 @@ scrollView = _scrollView;
 }
 - (void)customAction
 {
-    self.navigationItem.leftBarButtonItem.enabled = NO;
-    [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE onComplete:^(BOOL finished) {
-        if (finished) {
-            self.navigationItem.leftBarButtonItem.enabled = YES;
-        }
-    }];   
+    [[PKResManager getInstance] swithToStyle:CUSTOM_STYLE];
 }
 - (void)changeAction
 {
-    self.navigationItem.leftBarButtonItem.enabled = NO;
     if ([[PKResManager getInstance].styleName isEqualToString:SYSTEM_STYLE_LIGHT]) 
     {
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT onComplete:^(BOOL finished) {
-            if (finished) {
-                self.navigationItem.leftBarButtonItem.enabled = YES;
-            }
-        }];
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_NIGHT];
     }
     else 
     {
-        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT onComplete:^(BOOL finished) {
-            if (finished) {
-                self.navigationItem.leftBarButtonItem.enabled = YES;
-            }
-        }];   
+        [[PKResManager getInstance] swithToStyle:SYSTEM_STYLE_LIGHT];
     }
 }
 - (void)resetAction
