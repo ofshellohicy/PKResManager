@@ -198,12 +198,12 @@ customStyleArray = _customStyleArray;
                             substringFromIndex:DOCUMENTS_PREFIX.length];
     BOOL isDir=NO;
     NSError *error = nil;
-    NSString *stylePath = [[self getDocumentsDirectoryWithSubDir:CUSTOM_THEME_DIR] 
+    NSString *stylePath = [[self getDocumentsDirectoryWithSubDir:SAVED_STYLE_DIR] 
                            stringByAppendingFormat:@"/%@",bundleName];
     NSFileManager *fileManager = [NSFileManager defaultManager];    
     if (![fileManager fileExistsAtPath:stylePath isDirectory:&isDir] && isDir)
     {
-        NSLog(@" file unexitsts");
+        NSLog(@" No such file or directory");
         return NO;
     }
     if (![fileManager removeItemAtPath:stylePath error:&error]) 
@@ -256,7 +256,7 @@ customStyleArray = _customStyleArray;
         // file operation
         NSError *error = nil;
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *customStylePath = [[self getDocumentsDirectoryWithSubDir:CUSTOM_THEME_DIR] 
+        NSString *customStylePath = [[self getDocumentsDirectoryWithSubDir:SAVED_STYLE_DIR] 
                                      stringByAppendingFormat:@"/%@",bundleName];
         // if exist , overwrite 
         if ([fileManager fileExistsAtPath:customStylePath]) 
@@ -544,7 +544,7 @@ customStyleArray = _customStyleArray;
     else if([self isDocumentsURL:bundleURL])
     {
         _styleType = ResStyleType_Custom;
-        filePath = [self getDocumentsDirectoryWithSubDir:CUSTOM_THEME_DIR];
+        filePath = [self getDocumentsDirectoryWithSubDir:SAVED_STYLE_DIR];
         bundlePath = [NSString stringWithFormat:@"%@/%@",filePath,[bundleURL substringFromIndex:DOCUMENTS_PREFIX.length]];
     }
     else 

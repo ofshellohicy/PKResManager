@@ -19,8 +19,8 @@
 #define DOCUMENTS_PREFIX @"documents://"
 
 #define kAllResStyle @"kAllResStyle"
-#define CUSTOM_THEME_DIR @"CustomStyleDir"
-#define TEMP_CUSTOM_THEME_DIR @"TempCustomStyleDir" 
+#define SAVED_STYLE_DIR @"SavedStyleDir"
+#define TEMP_STYLE_DIR @"TempStyleDir" 
 
 #define kStyleName     @"kStyleName"
 #define kStyleVersion  @"kStyleVersion"

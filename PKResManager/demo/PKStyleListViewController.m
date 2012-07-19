@@ -77,8 +77,12 @@ dataArray = _dataArray;
         NSString *styleName = [aStyleDict objectForKey:kStyleName];
         //NSString *styleVersion = [aStyleDict objectForKey:kStyleVersion];
         [_dataArray addObject:styleName];
+        if (stop) {
+            [self.tableView reloadData];
+        }
     }];
-    [self.tableView reloadData];
+    
+    
 }
 - (void)addCustomStyleAction:(id)sender
 {

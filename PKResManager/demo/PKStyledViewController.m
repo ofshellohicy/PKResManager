@@ -101,7 +101,6 @@ scrollView = _scrollView;
             time = [[NSDate date] timeIntervalSince1970];
         }
         progressLabel.text = [NSString stringWithFormat:@"%.1f%%",progress*100];
-        
         [progressView setProgress:(float)progress];
         if (progress >= 1.0f) {
             time = [[NSDate date] timeIntervalSince1970] - time;            
